@@ -18,20 +18,28 @@ You don’t have to handle the length modifiers
 
 #include <stdarg.h>
 #include <unistd.h>
-
-// Function prototype
+#include <stdio.h>
+/* Function prototype */
 int _printf(const char *format, ...);
+void print_integer(int n);
 
-// MAIN
+
+/* MAIN */
 int main() {
     _printf("Character:[%c]\n", 'H');
     _printf("String:[%s]\n", "I am a string !");
     _printf("Percent:[%%]\n");
+
+    _printf("Integer value [%i] \n", 59);    
+    _printf("Integer value with d [%d] \n", -5);
+    _printf("Integer value negative [%i] \n", -9655);
+    _printf("Integer value zero [%d] \n", 0);
     return (0);
 }
 
 int _printf(const char *format, ...) {
     int i = 0;
+    int int_val;
     va_list list;
     va_start(list, format);
 
@@ -61,7 +69,15 @@ int _printf(const char *format, ...) {
                         write(1, "%", 1);
                     break;
                     }
-                    default:
+		    case 'd':
+		    	
+		    	int_val = va_arg(list, int);
+			print_integer(int_val);
+			break;
+		    case 'i':
+			int_val = va_arg(list, int);
+			print_integer(int_val);
+		    default:
                         break;
                 }
             }
@@ -73,4 +89,44 @@ int _printf(const char *format, ...) {
     }
     va_end(list);
     return 0;
+}
+
+
+void print_integer(int n)
+{
+	int num = n;
+	int len = 0;
+	int flag =0;
+	char zero;
+
+	zero = 48;
+	if (num == 0)
+		write(1, &zero, 1);
+	if (num < 0)
+	{
+		char a ='-';
+		write(1, &a, 1);
+		num = -num;
+		n = -n;
+	}
+	
+	while (num > 0) 
+	{
+		num =num / 10;
+		len++;
+	}
+
+	while (len > 0) 
+	{	
+
+		int d = 1;
+		int pow = len-1;
+		while (pow-- >0 )
+			d *= 10;
+		int digit = n / d;
+	  	digit = digit + 48;
+	  	write(1, &digit, 1);
+	  	n %= d;
+	   	len--;
+	}
 }
