@@ -7,13 +7,13 @@
   *
   * Return: always 0
   */
+
 int _printf(const char *format, ...)
 {
 	int i = 0, j = 0;
-	char *str;
 	char c;
+	char *str;
 	va_list list;
-
 	va_start(list, format);
 	while (format[i])
 	{
@@ -44,7 +44,9 @@ int _printf(const char *format, ...)
 			}
 		}
 		else
+		{
 			write(1, &format[i], 1);
+		}
 		i++;
 	}
 	va_end(list);
