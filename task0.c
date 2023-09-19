@@ -1,7 +1,7 @@
 #include "main.h"
 /**
   * _printf - my custom printf
-  * @format: fornatted string
+  * @format: formatted string
   *
   * Return: always 0
   */
@@ -34,6 +34,7 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 				break;
+
 			if (*format == '%')
 			{
 				write(1, format, 1);
@@ -49,9 +50,7 @@ int _printf(const char *format, ...)
 			{
 				str = va_arg(args, char*);
 				while (str[index] != '\0')
-				{
 					index++;
-				}
 				write(1, str, index);
 				print_char += index;
 			}
