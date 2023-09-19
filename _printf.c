@@ -6,7 +6,6 @@
   * Return: always 0
   */
 
-int _printf(const char *format, ...);
 
 int _printf(const char *format, ...)
 {
@@ -54,6 +53,12 @@ int _printf(const char *format, ...)
 				write(1, str, index);
 				print_char += index;
 			}
+			/** I have added an else for both number 8 and number 21 */
+			else if (*format == 'i' || *foramt == 'd')
+			{
+				print_integer(va_args);
+				
+			}	
 		}
 		format++;
 	}
