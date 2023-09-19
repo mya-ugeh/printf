@@ -1,52 +1,63 @@
-#include <stdarg.h>
-#include <unistd.h>
-
+#include "main.h"
 /**
   * _printf - my custom printf
   * @format: fornatted string
   *
   * Return: always 0
   */
+
+int _printf(const char *format, ...);
+
 int _printf(const char *format, ...)
 {
-	int i = 0, j = 0;
+	int print_char = 0;
 	char *str;
 	char c;
-	va_list list;
+	int index = 0;
 
-	va_start(list, format);
-	while (format[i])
+	va_list args;
+
+	if (format == NULL)
 	{
-		if (format[i] == '%')
+		return (-1);
+	}
+	va_start(args, format);
+	while (*format)
+	{
+		if (*format != '%')
 		{
-			i++;
-			if (format[i] == 'c')
-			{
-				c = va_arg(list, int);
-				write(1, &c, 1);
-			}
-			else if (format[i] == 's')
-			{
-				str = va_arg(list, char *);
-				while (str[j])
-				{
-					write(1, &str[j], 1);
-					j++;
-				}
-			}
-			else if (format[i] == '%')
-			{
-				write(1, "%", 1);
-			}
-			else
-			{
-				break;
-			}
+			write(1, format, 1);
+			print_char++;
 		}
 		else
-			write(1, &format[i], 1);
-		i++;
+		{
+			format++;
+			if (*format == '\0')
+				break;
+			if (*format == '%')
+			{
+				write(1, format, 1);
+				print_char++;
+			}
+			else if (*format == 'c')
+			{
+				c = va_arg(args, int);
+				write(1, &c, 1);
+				print_char++;
+			}
+			else if (*format == 's')
+			{
+				str = va_arg(args, char*);
+				while (str[index] != '\0')
+				{
+					index++;
+				}
+				write(1, str, index);
+				print_char += index;
+			}
+		}
+		format++;
 	}
-	va_end(list);
-	return (0);
+	va_end(args);
+	return (print_char);
 }
