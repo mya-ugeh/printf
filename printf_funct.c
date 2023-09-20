@@ -108,8 +108,16 @@ int format_string(const char *format, va_list args)
 				print_char += print_int(args);
 			else if (*format == 'b')
 				print_char += print_binary(args);
+			else if (*format == 'u')
+				print_char += print_unsigned(args);
+			else if (*format == 'o')
+				print_char += print_octal(args);
+			else if (*format == 'x')
+				print_char += print_hex(args);
+			else if (*format == 'X')
+				print_char += print_hex_upper(args);
 			else
-				break;
+				return (-1);
 		}
 		else
 			print_char += write(1, format, 1);
