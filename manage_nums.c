@@ -23,6 +23,8 @@ void print_integer(va_list list)
 
 	int_val = va_arg(list, int);
 	num = int_val;
+	if (num == NULL)
+		return (-1);
 	if (num == zero)
 	{
 		write(1, &zero, 1);

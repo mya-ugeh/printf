@@ -71,7 +71,7 @@ int format_string(const char *format, va_list args)
 				print_octal(args);
 			else if (*format == 'x')
 				print_hexa(args, 0);
-			else if (*format == 'X') 
+			else if (*format == 'X')
 				print_hexa(args, 1);
 			else
 				break;
