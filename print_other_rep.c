@@ -9,7 +9,7 @@
 void print_binary(va_list list)
 {
 	int b[64];
-	int i, num;
+	int i, j, num;
 	
 	num = va_arg(list, unsigned int);
 	i = 0;
@@ -19,7 +19,7 @@ void print_binary(va_list list)
 		num /= 2;
 		i++;
 	}
-	for (int j = i - 1; j >= 0; j--)
+	for (j = i - 1; j >= 0; j--)
 	{
 		write(1, &(b[j]), 1);
 	}
@@ -35,9 +35,10 @@ void print_binary(va_list list)
 void print_octal(va_list list)
 {
 	int oct[100];
-	int i = 0;
+	int i, x;
 	unsigned int num;
         
+	i= 0;
 	num = va_arg(list, unsigned int);
 	while (num != 0)
 	{
@@ -45,7 +46,7 @@ void print_octal(va_list list)
 		num = num / 8;
 		i++;
 	}
-	for (int x = i - 1; x >= 0; x--)
+	for (x = i - 1; x >= 0; x--)
 	{
 		write (1,&oct[x],1);
 	}
@@ -62,25 +63,28 @@ void print_octal(va_list list)
 void print_hexa(va_list list ,int flag)
 {
 	char hex[100];
-	int unsigned i, remainder, num;
+	int unsigned i, j, remainder, num;
     	num = va_arg(list, unsigned int);
 	i = 0;
+
 	while (num != 0) 
 	{
 		remainder = num % 16;
 		if (remainder < 10)
-		hex[i] = remainder + 48;
-	else 
-	{
-		if (flag)
-			hex[i] = remainder + 55;
-		else
-		hex[i] = remainder + 87;
+			hex[i] = remainder + 48;
+		else 
+		{
+			if (flag)
+				hex[i] = remainder + 55;
+			else
+				hex[i] = remainder + 87;
+		}
+		i++;
+		num /= 16;
 	}
-	i++;
-	num /= 16;
-    }
-    for (int j = i - 1; j >= 0; j--) {
-
-	    write(1, &hex[j], 1);
-    }
+	j = i - 1;
+	for (; j >= 0; j--) 
+	{
+		write(1, &hex[j], 1);
+	}
+}

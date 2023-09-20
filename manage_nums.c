@@ -15,7 +15,7 @@
 void print_integer(va_list list)
 {
 	int num,int_val;
-	int len;
+	int len, digit, pow, d;
 	char zero;
 	
 	zero = 0;
@@ -40,11 +40,11 @@ void print_integer(va_list list)
 		num = num / 10;
 		len++;
 	}
-	int digit = 0;
+	digit = 0;
 	while (len > 0)
 	{
-		int d = 1;
-		int pow = len - 1;
+		d = 1;
+		pow = len - 1;
 		while (pow-- > 0 )
 			    d *= 10;
 		digit = int_val / d;
@@ -64,10 +64,11 @@ void print_integer(va_list list)
 
 void print_unsigned_integer(va_list list)
 {
-	unsigned int num, n;
-	int len = 0;
+	unsigned int num, n, digit;
+	int len, d, pow ;
 	char zero;
-
+	
+	len = 0;
 	n = va_arg(list, unsigned int);
 	num = n;
 	zero = 48;
@@ -82,11 +83,11 @@ void print_unsigned_integer(va_list list)
 
 	while (len > 0)
 	{
-		int d = 1;
-		int pow = len - 1;
+		d = 1;
+		pow = len - 1;
 		while (pow-- > 0 )
 			d *= 10;
-		int digit = n / d;
+		digit = n / d;
 		digit = digit + 48;
 		write(1, &digit, 1);
 		n %= d;
