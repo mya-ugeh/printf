@@ -7,10 +7,6 @@
 int _printf(const char *format, ...)
 {
 	int print_char = 0;
-
-	if (format == NULL)
-		return (-1);
-
 	va_list args;
 
 	va_start(args, format);
