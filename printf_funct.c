@@ -44,6 +44,8 @@ int format_string(const char *format, va_list args)
 
 	while (*format)
 	{
+		if (format == NULL)
+			return (-1);
 		if (*format == '%')
 		{
 			format++;
