@@ -61,24 +61,15 @@ int print_binary(va_list args)
 {
 	unsigned int num = va_arg(args, unsigned int);
 	int print_char = 0;
-	char buffer[33];
+	char buffer[CHAR_BIT * sizeof(unsigned int) + 1];
 	int i;
-	int zeros = 0;
 
-	for (i = 31; i >= 0; i--)
+	for (i = CHAR_BIT * sizeof(unsigned int) - 1; i >= 0; i--)
 	{
-		char bit = (num >> i) & 1;
-
-		if (bit || zeros)
-		{
-			buffer[31 - i] = bit + '0';
-			zeros = 1;
-		}
-		else
-			buffer[31 - i] = ' ';
+		buffer[CHAR_BIT * sizeof(unsigned int) - 1 - i] = ((num >> i) & 1) + '0';
 	}
-	buffer[32] = '\0';
-	print_char = write(1, buffer, strlen(buffer));
+	buffer[CHAR_BIT * sizeof(unsigned int)] = '\0';
+	print_char = write(1, buffer, CHAR_BIT * sizeof(unsigned int));
 	return (print_char);
 }
 
