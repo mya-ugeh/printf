@@ -41,7 +41,6 @@ int print_str(va_list args)
 int format_string(const char *format, va_list args)
 {
 	int print_char = 0;
-
 	while (*format)
 	{
 		if (format == NULL)
@@ -52,13 +51,9 @@ int format_string(const char *format, va_list args)
 			if (*format == '\0')
 				break;
 			if (*format == 'c')
-			{
 				print_char += print_chars(args);
-			}
 			else if (*format == 's')
-			{
 				print_char += print_str(args);
-			}
 			else if (*format == '%')
 				print_char += write(1, "%", 1);
 			else if (*format == 'i' || *format == 'd')
