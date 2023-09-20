@@ -24,11 +24,15 @@ int print_chars(va_list args)
 int print_str(va_list args)
 {
 	char *str = va_arg(args, char*);
-	int len = strlen(str);
+	int len = 0;
 
-	int print_char = write(1, str, len);
-
-	return (print_char);
+	if (str == NULL)
+	{
+		len += write(1, "(null)", 6);
+	}
+	else
+		len += write(1, str, strlen(str));
+	return (len);
 }
 
 /**
@@ -91,8 +95,6 @@ int format_string(const char *format, va_list args)
 
 	while (*format)
 	{
-		if (format == NULL)
-			return (-1);
 		if (*format == '%')
 		{
 			format++;
@@ -117,7 +119,10 @@ int format_string(const char *format, va_list args)
 			else if (*format == 'X')
 				print_char += print_hex_upper(args);
 			else
-				return (-1);
+			{
+				print_char += write(1, "%", 1);
+				print_char += write(1, format, 1);
+			}
 		}
 		else
 			print_char += write(1, format, 1);
