@@ -32,6 +32,23 @@ int print_str(va_list args)
 }
 
 /**
+  * print_int - prints an integer
+  * @args: list of integers to print
+  * Return: The numbers
+  */
+int print_int(va_list args)
+{
+	int num = va_arg(args, int);
+	char buffer[12];
+	int print_char = 0;
+
+	snprintf(buffer, sizeof(buffer), "%d", num);
+	print_char = write(1, buffer, strlen(buffer));
+	return (print_char);
+}
+
+
+/**
  * format_string - Parse and print a format string.
  * @format: The format string to parse.
  * @args: A va_list containing the arguments for format specifiers.
@@ -57,18 +74,8 @@ int format_string(const char *format, va_list args)
 				print_char += print_str(args);
 			else if (*format == '%')
 				print_char += write(1, "%", 1);
-			else if (*format == 'i' || *format == 'd')
-				print_integer(args);
-			else if (*format == 'b')
-				print_binary(args);
-			else if (*format == 'u')
-				print_unsigned_integer(args);
-			else if (*format == 'o')
-				print_octal(args);
-			else if (*format == 'x')
-				print_hexa(args, 0);
-			else if (*format == 'X')
-				print_hexa(args, 1);
+			else if (*format == 'd' || *format == 'i')
+				print_char += print_int(args);
 			else
 				break;
 		}
