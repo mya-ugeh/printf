@@ -41,6 +41,7 @@ int print_str(va_list args)
 int format_string(const char *format, va_list args)
 {
 	int print_char = 0;
+
 	while (*format)
 	{
 		if (format == NULL)
