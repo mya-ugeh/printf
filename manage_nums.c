@@ -12,7 +12,7 @@
 */
 
 
-void print_integer(va_list list)
+int print_integer(va_list list)
 {
 	int num,int_val;
 	int len, digit, pow, d;
@@ -23,7 +23,7 @@ void print_integer(va_list list)
 
 	int_val = va_arg(list, int);
 	num = int_val;
-	if (num == NULL)
+	if (!num)
 		return (-1);
 	if (num == zero)
 	{
@@ -55,6 +55,8 @@ void print_integer(va_list list)
 		int_val %= d;
 		len--;
 	}
+	return (0);
+
 }
 
 /**
