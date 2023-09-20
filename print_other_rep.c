@@ -63,10 +63,12 @@ void print_octal(va_list list)
 void print_hexa(va_list list ,int flag)
 {
 	char hex[100];
-	int unsigned i, j, remainder, num;
-    	num = va_arg(list, unsigned int);
+	int unsigned i, x, remainder, num;
+    	
+	num = va_arg(list, unsigned int);
 	i = 0;
-
+	x = 1;
+	
 	while (num != 0) 
 	{
 		remainder = num % 16;
@@ -82,9 +84,8 @@ void print_hexa(va_list list ,int flag)
 		i++;
 		num /= 16;
 	}
-	j = i - 1;
-	for (; j >= 0; j--) 
+	for (x = i - 1; x > 0; x--)
 	{
-		write(1, &hex[j], 1);
+		write(1, &hex[x], 1);
 	}
 }
