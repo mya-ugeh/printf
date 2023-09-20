@@ -61,6 +61,18 @@ int format_string(const char *format, va_list args)
 			}
 			else if (*format == '%')
 				print_char += write(1, "%", 1);
+			else if (*format == 'i' || *format == 'd')
+				print_integer(args);
+			else if (*format == 'b')
+				print_binary(args);
+			else if (*format == 'u')
+				print_unsigned_integer(args);
+			else if (*format == 'o')
+				print_octal(args);
+			else if (*format == 'x')
+				print_hexa(args, 0);
+			else if (*format == 'X') 
+				print_hexa(args, 1);
 			else
 				break;
 		}
