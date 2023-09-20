@@ -47,6 +47,36 @@ int print_int(va_list args)
 	return (print_char);
 }
 
+/**
+ * print_binary - Print an unsigned integer in binary format.
+ * @args: A va_list containing the unsigned integer to print.
+ *
+ * Return: The number of characters printed.
+ */
+int print_binary(va_list args)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	int print_char = 0;
+	char buffer[33];
+	int i;
+	int zeros = 0;
+
+	for (i = 31; i >= 0; i--)
+	{
+		char bit = (num >> i) & 1;
+
+		if (bit || zeros)
+		{
+			buffer[31 - i] = bit + '0';
+			zeros = 1;
+		}
+		else
+			buffer[31 - i] = ' ';
+	}
+	buffer[32] = '\0';
+	print_char = write(1, buffer, strlen(buffer));
+	return (print_char);
+}
 
 /**
  * format_string - Parse and print a format string.
@@ -76,6 +106,8 @@ int format_string(const char *format, va_list args)
 				print_char += write(1, "%", 1);
 			else if (*format == 'd' || *format == 'i')
 				print_char += print_int(args);
+			else if (*format == 'b')
+				print_char += print_binary(args);
 			else
 				break;
 		}
