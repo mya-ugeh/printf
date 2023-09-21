@@ -2,7 +2,7 @@
 
 /**
  * print_unsigned - Print an unsigned integer.
- * @args: A va_list containing the unsigned integer to print.
+ * @args: unsigned integer to be printed
  *
  * Return: The number of characters printed.
  */
@@ -19,7 +19,7 @@ int print_unsigned(va_list args)
 
 /**
  * print_octal - Print an unsigned integer in octal format.
- * @args: A va_list containing the unsigned integer to print.
+ * @args: unsigned integer to printed "o"
  *
  * Return: The number of characters printed.
  */
@@ -35,12 +35,12 @@ int print_octal(va_list args)
 }
 
 /**
- * print_hex - Print an unsigned integer in lowercase hexadecimal format.
- * @args: A va_list containing the unsigned integer to print.
+ * print_lower_hex - Print an unsigned integer in lowercase hexadecimal format.
+ * @args: unsigned integer to printed "x"
  *
  * Return: The number of characters printed.
  */
-int print_hex(va_list args)
+int print_lower_hex(va_list args)
 {
     unsigned int num = va_arg(args, unsigned int);
     char buffer[12];
@@ -52,12 +52,12 @@ int print_hex(va_list args)
 }
 
 /**
- * print_hex_upper - Print an unsigned integer in uppercase hexadecimal format.
- * @args: A va_list containing the unsigned integer to print.
+ * print_upper_hex - Print an unsigned integer in uppercase hexadecimal format.
+ * @args: unsigned integer to print.
  *
  * Return: The number of characters printed.
  */
-int print_hex_upper(va_list args)
+int print_upper_hex(va_list args)
 {
     unsigned int num = va_arg(args, unsigned int);
     char buffer[12];

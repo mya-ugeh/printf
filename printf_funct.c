@@ -119,9 +119,9 @@ int format_string(const char *format, va_list args)
 			else if (*format == 'o')
 				print_char += print_octal(args);
 			else if (*format == 'x')
-				print_char += print_hex(args);
+				print_char += print_lower_hex(args);
 			else if (*format == 'X')
-				print_char += print_hex_upper(args);
+				print_char += print_upper_hex(args);
 			else
 			{
 				print_char += write(1, "%", 1);
