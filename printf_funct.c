@@ -2,8 +2,8 @@
 
 /**
   * print_chars - print a chararcter
-  * @args: A va_list containing character to print
-  * Return: number of chars to print
+  * @args:  character to print
+  * Return: chars to print
   */
 int print_chars(va_list args)
 {
@@ -14,12 +14,12 @@ int print_chars(va_list args)
 
 /**
  * print_str - Print a string to stdout.
- * @args: A va_list containing the string to print.
+ * @args: string to print.
  *
- * This function takes a va_list argument and prints the corresponding string
- * to the standard output (stdout).
+ * This function takes a va_list argument and prints the  string
+ * to the standard output
  *
- * Return: The number of characters printed.
+ * Return: characters printed.
  */
 int print_str(va_list args)
 {
@@ -37,7 +37,7 @@ int print_str(va_list args)
 
 /**
   * print_int - prints an integer
-  * @args: list of integers to print
+  * @args: integers to be printed
   * Return: The numbers
   */
 int print_int(va_list args)
@@ -52,24 +52,37 @@ int print_int(va_list args)
 }
 
 /**
- * print_binary - Print an unsigned integer in binary format.
- * @args: A va_list containing the unsigned integer to print.
+ * print_binary - Print an unsigned integer in a binary format.
+ * @args: unsigned integer to be  printed
  *
- * Return: The number of characters printed.
+ * Return: characters printed.
  */
 int print_binary(va_list args)
 {
 	unsigned int num = va_arg(args, unsigned int);
 	int print_char = 0;
-	char buffer[CHAR_BIT * sizeof(unsigned int) + 1];
-	int i;
 
-	for (i = CHAR_BIT * sizeof(unsigned int) - 1; i >= 0; i--)
+	if (num == 0)
 	{
-		buffer[CHAR_BIT * sizeof(unsigned int) - 1 - i] = ((num >> i) & 1) + '0';
+		print_char += write(1, "0", 1);
 	}
-	buffer[CHAR_BIT * sizeof(unsigned int)] = '\0';
-	print_char = write(1, buffer, CHAR_BIT * sizeof(unsigned int));
+	else
+	{
+		int bit = 0;
+		unsigned int j = 1;
+
+		while (j < num)
+		{
+			j <<= 1;
+			bit++;
+		}
+		while (bit >= 0)
+		{
+			char bits = ((num >> bit) & 1) + '0';
+			print_char += write(1, &bits, 1);
+			bit--;
+		}
+	}
 	return (print_char);
 }
 
