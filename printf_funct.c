@@ -122,6 +122,8 @@ int format_string(const char *format, va_list args)
 				print_char += print_lower_hex(args);
 			else if (*format == 'X')
 				print_char += print_upper_hex(args);
+			else if (*format == 'S')
+				print_char += print_custom_string(args);
 			else
 			{
 				print_char += write(1, "%", 1);

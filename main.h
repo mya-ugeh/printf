@@ -16,5 +16,6 @@ int print_unsigned(va_list args);
 int print_octal(va_list args);
 int print_lower_hex(va_list args);
 int print_upper_hex(va_list args);
+int print_custom_string(va_list args);
 
 #endif

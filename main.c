@@ -19,6 +19,9 @@ int main(void)
 		printf("Lengths differ.\n");
 		fflush(stdout);
 		return (1);
+	
 	}
+
+	_printf("this is custom string %S\n", "Best\nSchool");
 	return (0);
 }
